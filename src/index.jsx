@@ -12,26 +12,29 @@ class LikeButton extends React.Component {
     this.state = {
       count: 0
     };
+    this.handleClick = this.handleClick.bind(this);
   }
   componentDidMount() {
-    likes.watch().subscribe(allLikes => {
-      this.setState({count: allLikes.length})
+    likes.findAll({uuid: this.props.uuid}).watch().subscribe(data => {
+      this.setState({count: data.length})
     });
   }
 
   render() {
-    return <button onClick={this.handleClick}>Like +{this.state.count}</button>;
+    return <button onClick={this.handleClick}>Like {this.state.count}</button>;
   }
 
   handleClick(e) {
     e.preventDefault();
-    likes.store({id: new Date()})
+    likes.store({uuid: this.props.uuid, id: new Date()})
   }
 }
 
 function App() {
-  return <div><LikeButton/></div>
-
+  return <div>
+    <LikeButton uuid="http://russianpulse.ru/post/123"/>
+    <LikeButton uuid="http://russianpulse.ru/post/234"/>
+  </div>;
 }
 
 ReactDOM.render(
