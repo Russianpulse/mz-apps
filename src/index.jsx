@@ -5,7 +5,7 @@ import Comments from './components/Comments/index.jsx'
 
 function App() {
   return <div>
-    <Comments uuid="http://russianpulse.ru/post/234"/>
+    <Comments uuid="http://russianpulse.ru/post/236"/>
   </div>;
 }
 

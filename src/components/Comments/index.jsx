@@ -1,14 +1,28 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 
-const hz = Horizon({authType: 'anonymous'});
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
+import Button from 'material-ui/Button';
+import Card, { CardActions, CardContent } from 'material-ui/Card';
+import TextField from 'material-ui/TextField';
+import Typography from 'material-ui/Typography';
+import AuthButtons from '../AuthButtons/index.jsx'
+
+const hz = Horizon({authType: 'token'});
 hz.connect();
 
 const COLLECTION = 'mz_comments';
 
 class Comment extends React.Component {
   render() {
-    return <div>{this.props.comment}</div>;
+    return <Card>
+      <CardContent>
+      <Typography component="p">
+      {this.props.comment}
+      </Typography>
+      </CardContent>
+      </Card>;
   }
 }
 
@@ -24,8 +38,20 @@ class Form extends React.Component {
 
   render() {
     return <form onSubmit={this.handleSubmit}>
-        <textarea cols="80" rows="5" value={this.state.comment} onChange={this.handleChange} ></textarea>
-        <button>Submit</button>
+
+      <TextField
+        label="Place your comment here"
+        multiline
+        rows="5"
+        rowsMax="10"
+        margin="normal"
+        value={this.state.comment}
+        fullWidth
+        onChange={this.handleChange}
+        />
+
+        <br />
+        <Button onClick={this.handleSubmit} color="primary" raised>Send</Button>
       </form>;
   }
 
@@ -56,6 +82,8 @@ export class Comments extends React.Component {
       {this.comments()}
 
       <Form objectId={this.props.uuid} />
+
+      <AuthButtons />
       </div>;
   }
 
