@@ -9,7 +9,7 @@ import TextField from 'material-ui/TextField';
 import Typography from 'material-ui/Typography';
 import AuthButtons from '../AuthButtons/index.jsx'
 
-const hz = Horizon({authType: 'token'});
+const hz = Horizon({authType: 'anonymous'});
 hz.connect();
 
 const COLLECTION = 'mz_comments';

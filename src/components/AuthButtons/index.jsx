@@ -5,10 +5,14 @@ import Button from 'material-ui/Button';
 class AuthButtons extends React.Component {
   render() {
     return <div>
-      <Button raised>
-      Facebook
+      <Button raised onClick={this.handleFacebook}>
+        Facebook
       </Button>
     </div>;
+  }
+
+  handleFacebook() {
+    alert('facebook');
   }
 }
 
